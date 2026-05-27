@@ -123,49 +123,6 @@
       letter-spacing: .04em;
     }
 
-    /* ── progress bar ─────────────────────────────────────────── */
-    .progress-section {
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-100);
-      padding: 20px 24px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 12px rgba(13,27,110,.09);
-    }
-
-    .progress-label {
-      font-size: .85rem;
-      color: var(--gray-400);
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-
-    .progress-bar-wrap {
-      background: var(--gray-100);
-      border-radius: 999px;
-      height: 10px;
-      max-width: 480px;
-      margin: 0 auto;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--blue-light), var(--purple-light));
-      border-radius: 999px;
-      transition: width .5s ease;
-      width: 0%;
-    }
-
-    .progress-count {
-      font-size: .8rem;
-      color: var(--blue-light);
-      margin-top: 6px;
-      font-weight: 600;
-    }
-
     /* ── nav tabs ─────────────────────────────────────────────── */
     .nav-tabs {
       display: flex;
@@ -610,15 +567,6 @@
   <span class="hero-badge">✨ Seu Roteiro Mágico</span>
 </header>
 
-<!-- sticky progress ───────────────────────────────────────────── -->
-<div class="progress-section" id="progress-section" aria-label="Progresso das atrações">
-  <div class="progress-label">Atrações concluídas</div>
-  <div class="progress-bar-wrap">
-    <div class="progress-bar-fill" id="progress-fill" role="progressbar"
-         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-  </div>
-  <div class="progress-count" id="progress-count">0 de 25 atrações marcadas</div>
-</div>
 
 <!-- nav ───────────────────────────────────────────────────────── -->
 <nav class="nav-tabs" role="tablist" aria-label="Seções da viagem">
@@ -844,21 +792,6 @@
   }
 
   /* ── build parks ──────────────────────────────────────────── */
-  function totalAttractions() {
-    return PARKS.reduce((s, p) => s + p.attractions.length, 0);
-  }
-
-  function updateProgress() {
-    const total = totalAttractions();
-    const done  = checked.size;
-    const pct   = total ? Math.round((done / total) * 100) : 0;
-    const fill  = document.getElementById('progress-fill');
-    const count = document.getElementById('progress-count');
-    fill.style.width = pct + '%';
-    fill.setAttribute('aria-valuenow', pct);
-    count.textContent = done + ' de ' + total + ' atrações marcadas';
-  }
-
   function buildParks() {
     const grid = document.getElementById('park-grid');
 
@@ -932,7 +865,7 @@
             checkBox.textContent = '✓';
           }
           saveChecked(checked);
-          updateProgress();
+
         }
 
         li.addEventListener('click', toggle);
@@ -960,7 +893,7 @@
       grid.appendChild(card);
     });
 
-    updateProgress();
+
   }
 
   /* ── build lightning lane cards ───────────────────────────── */
@@ -1048,7 +981,7 @@
         const cb = li.querySelector('.attraction-check');
         if (cb) cb.textContent = '';
       });
-      updateProgress();
+  
     });
   }
 
