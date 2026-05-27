@@ -541,27 +541,24 @@
       margin: 10px 0;
     }
 
-    .btn-copy {
-      border: none;
-      cursor: pointer;
-      background: var(--blue-light);
+    .btn-whatsapp {
+      display: inline-block;
+      text-decoration: none;
+      background: #25d366;
       color: var(--white);
       border-radius: 999px;
-      padding: 10px 26px;
-      font-size: .9rem;
+      padding: 12px 28px;
+      font-size: .95rem;
       font-weight: 700;
       transition: var(--transition);
       margin-top: 8px;
+      box-shadow: 0 4px 14px rgba(37,211,102,.35);
     }
 
-    .btn-copy:hover { background: var(--blue-deep); }
-
-    .copy-feedback {
-      font-size: .82rem;
-      color: #22c55e;
-      margin-top: 8px;
-      min-height: 20px;
-      font-weight: 600;
+    .btn-whatsapp:hover {
+      background: #1ebe5d;
+      box-shadow: 0 6px 20px rgba(37,211,102,.45);
+      transform: translateY(-2px);
     }
 
     /* ── checklist reset button ───────────────────────────────── */
@@ -627,7 +624,6 @@
 <nav class="nav-tabs" role="tablist" aria-label="Seções da viagem">
   <button class="nav-tab active" role="tab" aria-selected="true"  aria-controls="panel-parks"      data-panel="parks">🎢 Parques</button>
   <button class="nav-tab"        role="tab" aria-selected="false" aria-controls="panel-ll"         data-panel="ll">⚡ Lightning Lane</button>
-  <button class="nav-tab"        role="tab" aria-selected="false" aria-controls="panel-suggestion" data-panel="suggestion">📋 Sugestão</button>
   <button class="nav-tab"        role="tab" aria-selected="false" aria-controls="panel-guide"      data-panel="guide">🗺️ Guiamento</button>
 </nav>
 
@@ -648,24 +644,6 @@
   <section id="panel-ll" class="tab-panel" role="tabpanel" aria-labelledby="tab-ll">
     <h2 class="section-heading">⚡ Como Funciona o Lightning Lane?</h2>
     <div class="ll-cards" id="ll-cards"></div>
-  </section>
-
-  <!-- SUGGESTION ─────────────────────────────────────────────── -->
-  <section id="panel-suggestion" class="tab-panel" role="tabpanel" aria-labelledby="tab-suggestion">
-    <h2 class="section-heading">📋 Sugestão de Compra</h2>
-    <p style="font-size:.9rem;color:var(--gray-400);margin-bottom:20px;">
-      Combinação recomendada de Lightning Lanes por parque.
-    </p>
-    <table class="suggestion-table" id="suggestion-table">
-      <thead>
-        <tr>
-          <th>Parque</th>
-          <th>Recomendação</th>
-          <th>Destaque</th>
-        </tr>
-      </thead>
-      <tbody id="suggestion-tbody"></tbody>
-    </table>
   </section>
 
   <!-- GUIDE ──────────────────────────────────────────────────── -->
@@ -689,10 +667,13 @@
       <p style="font-size:.85rem;color:var(--gray-400);margin-bottom:8px;">
         Disponível do primeiro ao último dia de parque, via WhatsApp.
       </p>
-      <button class="btn-copy" id="btn-copy" aria-label="Copiar número de telefone">
-        📋 Copiar número
-      </button>
-      <div class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></div>
+      <a class="btn-whatsapp"
+         href="https://wa.me/5511976526215?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Disney%202026%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20guiamento."
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Abrir conversa no WhatsApp">
+        💬 Falar no WhatsApp
+      </a>
     </div>
   </section>
 
@@ -817,13 +798,6 @@
         'Máximo conforto e flexibilidade',
       ],
     },
-  ];
-
-  const SUGGESTIONS = [
-    { park: '🏰 Magic Kingdom',   rec: ['Multi Pass', 'Single Pass'], highlight: 'TRON' },
-    { park: '🎬 Hollywood Studios', rec: ['Multi Pass', 'Single Pass'], highlight: 'Rise of the Resistance' },
-    { park: '🌿 Animal Kingdom',  rec: ['Single Pass'], highlight: 'Avatar Flight of Passage' },
-    { park: '🌍 Epcot',           rec: ['Single Pass'], highlight: 'Guardians of the Galaxy' },
   ];
 
   const GUIDE_STEPS = [
@@ -1023,34 +997,6 @@
   }
 
   /* ── build suggestion table ───────────────────────────────── */
-  function buildSuggestions() {
-    const tbody = document.getElementById('suggestion-tbody');
-
-    SUGGESTIONS.forEach(s => {
-      const tr = el('tr');
-
-      const tdPark = el('td');
-      tdPark.style.fontWeight = '700';
-      tdPark.textContent = s.park;
-
-      const tdRec = el('td');
-      s.rec.forEach(r => {
-        const cls = r.includes('Multi') ? 'badge badge-multi' : 'badge badge-single';
-        const b = txt('span', r, cls);
-        tdRec.appendChild(b);
-      });
-
-      const tdHL = el('td');
-      tdHL.style.cssText = 'color:var(--blue-light);font-weight:600';
-      tdHL.textContent = s.highlight;
-
-      tr.appendChild(tdPark);
-      tr.appendChild(tdRec);
-      tr.appendChild(tdHL);
-      tbody.appendChild(tr);
-    });
-  }
-
   /* ── build guide steps ────────────────────────────────────── */
   function buildGuide() {
     const wrap = document.getElementById('guide-steps');
@@ -1106,35 +1052,13 @@
     });
   }
 
-  /* ── copy phone ───────────────────────────────────────────── */
-  function buildCopy() {
-    const btn      = document.getElementById('btn-copy');
-    const feedback = document.getElementById('copy-feedback');
-    const phone    = '(11) 97652-6215';
-
-    btn.addEventListener('click', function () {
-      if (!navigator.clipboard) {
-        feedback.textContent = 'Copie manualmente: ' + phone;
-        return;
-      }
-      navigator.clipboard.writeText(phone).then(function () {
-        feedback.textContent = '✓ Número copiado!';
-        setTimeout(function () { feedback.textContent = ''; }, 3000);
-      }).catch(function () {
-        feedback.textContent = 'Copie manualmente: ' + phone;
-      });
-    });
-  }
-
   /* ── init ─────────────────────────────────────────────────── */
   function init() {
     buildParks();
     buildLL();
-    buildSuggestions();
     buildGuide();
     buildTabs();
     buildReset();
-    buildCopy();
   }
 
   if (document.readyState === 'loading') {
