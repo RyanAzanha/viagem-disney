@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none';
+             style-src 'self' 'unsafe-inline';
+             script-src 'self' 'unsafe-inline';
+             img-src 'self' data:;
+             font-src 'self';
+             connect-src 'none';
+             frame-src 'none';
+             object-src 'none';
+             base-uri 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Disney 2026 — Família Oliveira</title>
+  <style>
+    /* ── reset & tokens ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-deep:   #0d1b6e;
+      --blue-mid:    #1a3a8f;
+      --blue-light:  #2256c7;
+      --gold:        #f7c83c;
+      --gold-dark:   #d4a017;
+      --purple:      #6b3fa0;
+      --purple-light:#9b6fd4;
+      --red:         #e31837;
+      --white:       #ffffff;
+      --off-white:   #f4f6fb;
+      --gray-100:    #e8ecf5;
+      --gray-400:    #8898b8;
+      --gray-700:    #3a4668;
+      --text:        #1e2a4a;
+      --radius:      14px;
+      --shadow:      0 4px 24px rgba(13,27,110,.18);
+      --transition:  .28s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--off-white);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── stars background ─────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(107,63,160,.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(26,58,143,.15) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── hero ─────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue-mid) 55%, var(--purple) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 64px 24px 80px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Ccircle cx='200' cy='200' r='160' fill='none' stroke='rgba(247,200,60,.08)' stroke-width='60'/%3E%3C/svg%3E") center/500px no-repeat;
+      pointer-events: none;
+    }
+
+    .hero-castle {
+      font-size: 72px;
+      line-height: 1;
+      margin-bottom: 12px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 20px rgba(0,0,0,.35);
+    }
+
+    .hero-title span {
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      margin-top: 10px;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(255,255,255,.78);
+      font-weight: 400;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      margin-top: 24px;
+      background: rgba(247,200,60,.18);
+      border: 1.5px solid rgba(247,200,60,.45);
+      color: var(--gold);
+      border-radius: 999px;
+      padding: 6px 22px;
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+
+    /* ── progress bar ─────────────────────────────────────────── */
+    .progress-section {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 20px 24px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(13,27,110,.09);
+    }
+
+    .progress-label {
+      font-size: .85rem;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .progress-bar-wrap {
+      background: var(--gray-100);
+      border-radius: 999px;
+      height: 10px;
+      max-width: 480px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue-light), var(--purple-light));
+      border-radius: 999px;
+      transition: width .5s ease;
+      width: 0%;
+    }
+
+    .progress-count {
+      font-size: .8rem;
+      color: var(--blue-light);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* ── nav tabs ─────────────────────────────────────────────── */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 28px 24px 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .nav-tab {
+      border: none;
+      cursor: pointer;
+      background: var(--white);
+      color: var(--gray-700);
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-size: .9rem;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(13,27,110,.08);
+    }
+
+    .nav-tab:hover {
+      border-color: var(--blue-light);
+      color: var(--blue-light);
+    }
+
+    .nav-tab.active {
+      background: var(--blue-deep);
+      color: var(--white);
+      border-color: var(--blue-deep);
+    }
+
+    /* ── main layout ──────────────────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-heading {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--blue-deep);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ── tab panels ───────────────────────────────────────────── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn .3s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── park cards ───────────────────────────────────────────── */
+    .park-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .park-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .park-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 36px rgba(13,27,110,.22);
+    }
+
+    .park-card-header {
+      padding: 22px 22px 16px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .park-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .park-icon.mk  { background: linear-gradient(135deg,#e31837,#ff6b8a); }
+    .park-icon.hs  { background: linear-gradient(135deg,#d4a017,#f7c83c); }
+    .park-icon.ep  { background: linear-gradient(135deg,#1a8f6b,#2fd6a3); }
+    .park-icon.ak  { background: linear-gradient(135deg,#2d7a2d,#6ec46e); }
+
+    .park-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue-deep);
+    }
+
+    .park-tagline {
+      font-size: .8rem;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+
+    .park-chevron {
+      margin-left: auto;
+      color: var(--gray-400);
+      font-size: 1.1rem;
+      transition: transform var(--transition);
+    }
+
+    .park-card.open .park-chevron { transform: rotate(180deg); }
+
+    .park-card-body {
+      display: none;
+      padding: 0 22px 20px;
+      border-top: 1px solid var(--gray-100);
+    }
+
+    .park-card.open .park-card-body { display: block; }
+
+    .attraction-list {
+      list-style: none;
+      margin-top: 14px;
+    }
+
+    .attraction-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-100);
+      cursor: pointer;
+      transition: background var(--transition);
+      border-radius: 8px;
+      padding-left: 8px;
+    }
+
+    .attraction-item:last-child { border-bottom: none; }
+
+    .attraction-item:hover { background: var(--gray-100); }
+
+    .attraction-check {
+      width: 22px; height: 22px;
+      border: 2px solid var(--gray-400);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+      font-size: .85rem;
+    }
+
+    .attraction-item.checked .attraction-check {
+      background: var(--blue-light);
+      border-color: var(--blue-light);
+      color: var(--white);
+    }
+
+    .attraction-name {
+      font-size: .93rem;
+      color: var(--text);
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .attraction-item.checked .attraction-name {
+      text-decoration: line-through;
+      color: var(--gray-400);
+    }
+
+    .attraction-ll {
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .ll-multi  { background: #dbeafe; color: #1d4ed8; }
+    .ll-single { background: #fef3c7; color: #b45309; }
+    .ll-premier{ background: #f3e8ff; color: #7c3aed; }
+
+    /* ── lightning lane section ───────────────────────────────── */
+    .ll-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .ll-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border-top: 5px solid transparent;
+      transition: transform var(--transition);
+    }
+
+    .ll-card:hover { transform: translateY(-4px); }
+
+    .ll-card.multi   { border-color: #1d4ed8; }
+    .ll-card.single  { border-color: #b45309; }
+    .ll-card.premier { border-color: #7c3aed; }
+
+    .ll-card-icon { font-size: 2.2rem; margin-bottom: 10px; }
+
+    .ll-card-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--blue-deep);
+      margin-bottom: 4px;
+    }
+
+    .ll-price {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 10px 0;
+    }
+
+    .ll-card.multi   .ll-price { color: #1d4ed8; }
+    .ll-card.single  .ll-price { color: #b45309; }
+    .ll-card.premier .ll-price { color: #7c3aed; }
+
+    .ll-features {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .ll-features li {
+      font-size: .85rem;
+      color: var(--gray-700);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .ll-features li:last-child { border-bottom: none; }
+
+    .ll-features li::before {
+      content: '✓';
+      color: #22c55e;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    /* ── suggestion table ─────────────────────────────────────── */
+    .suggestion-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .suggestion-table th {
+      background: var(--blue-deep);
+      color: var(--white);
+      padding: 14px 18px;
+      text-align: left;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .suggestion-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: .9rem;
+      color: var(--text);
+    }
+
+    .suggestion-table tr:last-child td { border-bottom: none; }
+
+    .suggestion-table tr:hover td { background: var(--off-white); }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 12px;
+      font-size: .75rem;
+      font-weight: 700;
+      margin: 2px 3px 2px 0;
+    }
+
+    .badge-multi   { background: #dbeafe; color: #1d4ed8; }
+    .badge-single  { background: #fef3c7; color: #b45309; }
+
+    /* ── guia section ─────────────────────────────────────────── */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .guide-step {
+      display: flex;
+      gap: 16px;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .step-num {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--blue-light), var(--purple));
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      font-size: .93rem;
+      color: var(--text);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    /* ── tip card ─────────────────────────────────────────────── */
+    .tip-card {
+      background: linear-gradient(135deg, var(--blue-deep), var(--purple));
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    .tip-card .tip-icon { font-size: 3rem; margin-bottom: 12px; }
+    .tip-card p { font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,.88); }
+
+    /* ── contact card ─────────────────────────────────────────── */
+    .contact-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .contact-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue-deep);
+      margin-bottom: 6px;
+    }
+
+    .contact-phone {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--blue-light);
+      letter-spacing: .04em;
+      margin: 10px 0;
+    }
+
+    .btn-copy {
+      border: none;
+      cursor: pointer;
+      background: var(--blue-light);
+      color: var(--white);
+      border-radius: 999px;
+      padding: 10px 26px;
+      font-size: .9rem;
+      font-weight: 700;
+      transition: var(--transition);
+      margin-top: 8px;
+    }
+
+    .btn-copy:hover { background: var(--blue-deep); }
+
+    .copy-feedback {
+      font-size: .82rem;
+      color: #22c55e;
+      margin-top: 8px;
+      min-height: 20px;
+      font-weight: 600;
+    }
+
+    /* ── checklist reset button ───────────────────────────────── */
+    .btn-reset {
+      border: 2px solid var(--gray-400);
+      cursor: pointer;
+      background: transparent;
+      color: var(--gray-400);
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: .82rem;
+      font-weight: 600;
+      transition: var(--transition);
+      margin-top: 24px;
+      display: block;
+    }
+
+    .btn-reset:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    /* ── footer ───────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      font-size: .82rem;
+      color: var(--gray-400);
+      border-top: 1px solid var(--gray-100);
+    }
+
+    /* ── responsive ───────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { padding: 48px 16px 60px; }
+      .nav-tabs { gap: 6px; padding: 20px 16px 0; }
+      .nav-tab { padding: 8px 16px; font-size: .82rem; }
+      .container { padding: 20px 14px 50px; }
+      .suggestion-table th, .suggestion-table td { padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- hero ──────────────────────────────────────────────────────── -->
+<header class="hero">
+  <div class="hero-castle" aria-hidden="true">🏰</div>
+  <h1 class="hero-title">Disney <span>2026</span></h1>
+  <p class="hero-subtitle">Roteiro completo da viagem</p>
+  <span class="hero-badge">✨ Família Oliveira</span>
+</header>
+
+<!-- sticky progress ───────────────────────────────────────────── -->
+<div class="progress-section" id="progress-section" aria-label="Progresso das atrações">
+  <div class="progress-label">Atrações concluídas</div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-fill" role="progressbar"
+         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <div class="progress-count" id="progress-count">0 de 25 atrações marcadas</div>
+</div>
+
+<!-- nav ───────────────────────────────────────────────────────── -->
+<nav class="nav-tabs" role="tablist" aria-label="Seções da viagem">
+  <button class="nav-tab active" role="tab" aria-selected="true"  aria-controls="panel-parks"      data-panel="parks">🎢 Parques</button>
+  <button class="nav-tab"        role="tab" aria-selected="false" aria-controls="panel-ll"         data-panel="ll">⚡ Lightning Lane</button>
+  <button class="nav-tab"        role="tab" aria-selected="false" aria-controls="panel-suggestion" data-panel="suggestion">📋 Sugestão</button>
+  <button class="nav-tab"        role="tab" aria-selected="false" aria-controls="panel-guide"      data-panel="guide">🗺️ Guiamento</button>
+</nav>
+
+<!-- main ──────────────────────────────────────────────────────── -->
+<main class="container" id="main-content">
+
+  <!-- PARKS ──────────────────────────────────────────────────── -->
+  <section id="panel-parks" class="tab-panel active" role="tabpanel" aria-labelledby="tab-parks">
+    <h2 class="section-heading">🎠 Parques para Visitar</h2>
+    <p style="font-size:.9rem;color:var(--gray-400);margin-bottom:20px;">
+      Clique no parque para expandir as atrações. Marque as que você já fez!
+    </p>
+    <div class="park-grid" id="park-grid"></div>
+    <button class="btn-reset" id="btn-reset">↺ Resetar progresso</button>
+  </section>
+
+  <!-- LIGHTNING LANE ─────────────────────────────────────────── -->
+  <section id="panel-ll" class="tab-panel" role="tabpanel" aria-labelledby="tab-ll">
+    <h2 class="section-heading">⚡ Como Funciona o Lightning Lane?</h2>
+    <div class="ll-cards" id="ll-cards"></div>
+  </section>
+
+  <!-- SUGGESTION ─────────────────────────────────────────────── -->
+  <section id="panel-suggestion" class="tab-panel" role="tabpanel" aria-labelledby="tab-suggestion">
+    <h2 class="section-heading">📋 Sugestão de Compra</h2>
+    <p style="font-size:.9rem;color:var(--gray-400);margin-bottom:20px;">
+      Combinação recomendada de Lightning Lanes por parque.
+    </p>
+    <table class="suggestion-table" id="suggestion-table">
+      <thead>
+        <tr>
+          <th>Parque</th>
+          <th>Recomendação</th>
+          <th>Destaque</th>
+        </tr>
+      </thead>
+      <tbody id="suggestion-tbody"></tbody>
+    </table>
+  </section>
+
+  <!-- GUIDE ──────────────────────────────────────────────────── -->
+  <section id="panel-guide" class="tab-panel" role="tabpanel" aria-labelledby="tab-guide">
+    <h2 class="section-heading">🗺️ Como Funciona o Guiamento?</h2>
+    <div class="guide-steps" id="guide-steps"></div>
+
+    <div class="tip-card" style="margin-top:28px;">
+      <div class="tip-icon">💡</div>
+      <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:8px;">Dica Extra</h3>
+      <p>Aproveite ao máximo cada parque! Chegue cedo, use os Lightning Lanes estrategicamente e não deixe de ver os shows noturnos — são inesquecíveis.</p>
+    </div>
+
+    <div class="contact-card" style="margin-top:24px;">
+      <div style="font-size:2rem;margin-bottom:8px;">📱</div>
+      <h3>Contato do Guia</h3>
+      <div class="contact-phone" id="contact-phone">(11) 97652-6215</div>
+      <p style="font-size:.85rem;color:var(--gray-400);margin-bottom:8px;">
+        Disponível do primeiro ao último dia de parque, via WhatsApp.
+      </p>
+      <button class="btn-copy" id="btn-copy" aria-label="Copiar número de telefone">
+        📋 Copiar número
+      </button>
+      <div class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Disney 2026 · Família Oliveira · Roteiro personalizado</p>
+  <p style="margin-top:6px;">🏰 Que a magia comece!</p>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── data (no user-controlled content — safe for textContent) ── */
+  const PARKS = [
+    {
+      id: 'mk',
+      name: 'Magic Kingdom',
+      icon: '🏰',
+      iconClass: 'mk',
+      tagline: 'O coração da magia Disney',
+      attractions: [
+        { name: 'Castelo da Cinderela',    ll: null },
+        { name: 'Show de Fogos',           ll: null },
+        { name: 'Paradas',                 ll: null },
+        { name: 'TRON',                    ll: 'single' },
+        { name: 'Space Mountain',          ll: 'multi' },
+        { name: 'Seven Dwarfs Mine Train', ll: 'multi' },
+        { name: 'Haunted Mansion',         ll: 'multi' },
+        { name: 'Big Thunder Mountain',    ll: 'multi' },
+        { name: "Peter Pan's Flight",      ll: 'multi' },
+      ],
+    },
+    {
+      id: 'hs',
+      name: 'Hollywood Studios',
+      icon: '🎬',
+      iconClass: 'hs',
+      tagline: 'Filmes ganham vida aqui',
+      attractions: [
+        { name: 'Shows (Bela e a Fera, Indiana Jones, Pequena Sereia…)', ll: null },
+        { name: 'Fantasmic!',              ll: null },
+        { name: "Rock 'n' Roller Coaster", ll: 'multi' },
+        { name: 'Tower of Terror',         ll: 'multi' },
+        { name: 'Slinky Dog Dash',         ll: 'multi' },
+        { name: 'Rise of the Resistance',  ll: 'single' },
+        { name: 'Millennium Falcon',       ll: 'multi' },
+      ],
+    },
+    {
+      id: 'ep',
+      name: 'Epcot',
+      icon: '🌍',
+      iconClass: 'ep',
+      tagline: 'Viagem pelo mundo e pela tecnologia',
+      attractions: [
+        { name: 'Viagem pelo Mundo',       ll: null },
+        { name: 'Luminous – The Symphony of Us', ll: null },
+        { name: 'Frozen Ever After',       ll: 'multi' },
+        { name: 'Guardians of the Galaxy', ll: 'single' },
+        { name: "Remy's Ratatouille Adventure", ll: 'multi' },
+        { name: 'Soarin',                  ll: 'multi' },
+        { name: 'The Seas with Nemo',      ll: 'multi' },
+      ],
+    },
+    {
+      id: 'ak',
+      name: 'Animal Kingdom',
+      icon: '🌿',
+      iconClass: 'ak',
+      tagline: 'Natureza e aventura selvagem',
+      attractions: [
+        { name: 'Espetáculos',             ll: null },
+        { name: 'Trilhas com Animais',     ll: null },
+        { name: "Na'vi River Journey",     ll: 'multi' },
+        { name: 'Expedition Everest',      ll: 'multi' },
+        { name: 'Avatar Flight of Passage',ll: 'single' },
+      ],
+    },
+  ];
+
+  const LL_TYPES = [
+    {
+      id: 'multi',
+      cls: 'multi',
+      icon: '⚡',
+      title: 'Lightning Lane Multi Pass',
+      price: '$20 – $45',
+      unit: 'por pessoa / dia',
+      features: [
+        'Comprado 3 dias antes do 1º dia de parque',
+        'Agendamento antecipado de 3 atrações',
+        '1 atração concorrida + 2 secundárias',
+        'Ao usar uma reserva, já libera a próxima',
+      ],
+    },
+    {
+      id: 'single',
+      cls: 'single',
+      icon: '🎯',
+      title: 'Lightning Lane Single Pass',
+      price: '$12 – $29',
+      unit: 'por pessoa / atração',
+      features: [
+        'Comprado 3 dias antes do 1º dia de parque',
+        'Passe para apenas 1 atração extremamente concorrida',
+        'Ideal para: TRON, Rise of the Resistance, Avatar…',
+      ],
+    },
+    {
+      id: 'premier',
+      cls: 'premier',
+      icon: '👑',
+      title: 'Lightning Lane Premier Pass',
+      price: '$129 – $499',
+      unit: 'por pessoa / dia',
+      features: [
+        'Comprado 3 dias antes do 1º dia de parque',
+        'Sem necessidade de reservar horários',
+        '1 entrada por atração ao longo do dia',
+        'Máximo conforto e flexibilidade',
+      ],
+    },
+  ];
+
+  const SUGGESTIONS = [
+    { park: '🏰 Magic Kingdom',   rec: ['Multi Pass', 'Single Pass'], highlight: 'TRON' },
+    { park: '🎬 Hollywood Studios', rec: ['Multi Pass', 'Single Pass'], highlight: 'Rise of the Resistance' },
+    { park: '🌿 Animal Kingdom',  rec: ['Single Pass'], highlight: 'Avatar Flight of Passage' },
+    { park: '🌍 Epcot',           rec: ['Single Pass'], highlight: 'Guardians of the Galaxy' },
+  ];
+
+  const GUIDE_STEPS = [
+    '3 dias antes do primeiro dia de parque de vocês, comprarei os Lightning Lanes programados.',
+    'Nos dias de parque agendarei os horários das atrações ao longo do dia e enviarei para vocês por WhatsApp.',
+    'Estarei disponível para dúvidas desde a entrada até a saída de vocês dos parques.',
+  ];
+
+  /* ── storage key (namespaced) ─────────────────────────────── */
+  const STORAGE_KEY = 'disney2026_checklist_v1';
+
+  /* ── load/save checklist ──────────────────────────────────── */
+  function loadChecked() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return new Set();
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return new Set();
+      return new Set(parsed.filter(x => typeof x === 'string' && x.length < 120));
+    } catch {
+      return new Set();
+    }
+  }
+
+  function saveChecked(set) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+    } catch { /* quota exceeded — silently ignore */ }
+  }
+
+  let checked = loadChecked();
+
+  /* ── helpers (always use textContent / setAttribute, never innerHTML with data) */
+  function el(tag, cls) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    return e;
+  }
+
+  function txt(tag, text, cls) {
+    const e = el(tag, cls);
+    e.textContent = text;
+    return e;
+  }
+
+  /* ── build parks ──────────────────────────────────────────── */
+  function totalAttractions() {
+    return PARKS.reduce((s, p) => s + p.attractions.length, 0);
+  }
+
+  function updateProgress() {
+    const total = totalAttractions();
+    const done  = checked.size;
+    const pct   = total ? Math.round((done / total) * 100) : 0;
+    const fill  = document.getElementById('progress-fill');
+    const count = document.getElementById('progress-count');
+    fill.style.width = pct + '%';
+    fill.setAttribute('aria-valuenow', pct);
+    count.textContent = done + ' de ' + total + ' atrações marcadas';
+  }
+
+  function buildParks() {
+    const grid = document.getElementById('park-grid');
+
+    PARKS.forEach(park => {
+      const card = el('div', 'park-card');
+      card.id = 'card-' + park.id;
+
+      /* header */
+      const header = el('div', 'park-card-header');
+      header.setAttribute('role', 'button');
+      header.setAttribute('aria-expanded', 'false');
+      header.setAttribute('tabindex', '0');
+      header.setAttribute('aria-controls', 'body-' + park.id);
+
+      const iconDiv = el('div', 'park-icon ' + park.iconClass);
+      iconDiv.textContent = park.icon;
+      iconDiv.setAttribute('aria-hidden', 'true');
+
+      const info = el('div');
+      info.appendChild(txt('div', park.name, 'park-name'));
+      info.appendChild(txt('div', park.tagline, 'park-tagline'));
+
+      const chev = el('span', 'park-chevron');
+      chev.textContent = '▾';
+      chev.setAttribute('aria-hidden', 'true');
+
+      header.appendChild(iconDiv);
+      header.appendChild(info);
+      header.appendChild(chev);
+
+      /* body */
+      const body = el('div', 'park-card-body');
+      body.id = 'body-' + park.id;
+
+      const list = el('ul', 'attraction-list');
+      list.setAttribute('aria-label', 'Atrações de ' + park.name);
+
+      park.attractions.forEach(attr => {
+        const itemId = park.id + '::' + attr.name;
+        const li = el('li', 'attraction-item' + (checked.has(itemId) ? ' checked' : ''));
+        li.setAttribute('role', 'checkbox');
+        li.setAttribute('aria-checked', checked.has(itemId) ? 'true' : 'false');
+        li.setAttribute('tabindex', '0');
+        li.setAttribute('aria-label', attr.name);
+
+        const checkBox = el('div', 'attraction-check');
+        checkBox.setAttribute('aria-hidden', 'true');
+        if (checked.has(itemId)) checkBox.textContent = '✓';
+
+        const nameSpan = txt('span', attr.name, 'attraction-name');
+
+        li.appendChild(checkBox);
+        li.appendChild(nameSpan);
+
+        if (attr.ll) {
+          const llLabels = { multi: 'Multi Pass', single: 'Single Pass', premier: 'Premier Pass' };
+          const badge = txt('span', llLabels[attr.ll], 'attraction-ll ll-' + attr.ll);
+          li.appendChild(badge);
+        }
+
+        function toggle() {
+          if (checked.has(itemId)) {
+            checked.delete(itemId);
+            li.classList.remove('checked');
+            li.setAttribute('aria-checked', 'false');
+            checkBox.textContent = '';
+          } else {
+            checked.add(itemId);
+            li.classList.add('checked');
+            li.setAttribute('aria-checked', 'true');
+            checkBox.textContent = '✓';
+          }
+          saveChecked(checked);
+          updateProgress();
+        }
+
+        li.addEventListener('click', toggle);
+        li.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        });
+
+        list.appendChild(li);
+      });
+
+      body.appendChild(list);
+      card.appendChild(header);
+      card.appendChild(body);
+
+      function toggleCard() {
+        const open = card.classList.toggle('open');
+        header.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      header.addEventListener('click', toggleCard);
+      header.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCard(); }
+      });
+
+      grid.appendChild(card);
+    });
+
+    updateProgress();
+  }
+
+  /* ── build lightning lane cards ───────────────────────────── */
+  function buildLL() {
+    const wrap = document.getElementById('ll-cards');
+
+    LL_TYPES.forEach(lt => {
+      const card = el('div', 'll-card ' + lt.cls);
+
+      const icon = el('div', 'll-card-icon');
+      icon.textContent = lt.icon;
+      icon.setAttribute('aria-hidden', 'true');
+
+      card.appendChild(icon);
+      card.appendChild(txt('h3', lt.title, 'll-card-title'));
+
+      const price = el('div', 'll-price');
+      price.textContent = lt.price;
+
+      const unit = txt('span', ' ' + lt.unit, null);
+      unit.style.cssText = 'font-size:.75rem;font-weight:500;color:var(--gray-400)';
+      price.appendChild(unit);
+      card.appendChild(price);
+
+      const feat = el('ul', 'll-features');
+      feat.setAttribute('aria-label', 'Características do ' + lt.title);
+      lt.features.forEach(f => {
+        const li = txt('li', f);
+        feat.appendChild(li);
+      });
+      card.appendChild(feat);
+      wrap.appendChild(card);
+    });
+  }
+
+  /* ── build suggestion table ───────────────────────────────── */
+  function buildSuggestions() {
+    const tbody = document.getElementById('suggestion-tbody');
+
+    SUGGESTIONS.forEach(s => {
+      const tr = el('tr');
+
+      const tdPark = el('td');
+      tdPark.style.fontWeight = '700';
+      tdPark.textContent = s.park;
+
+      const tdRec = el('td');
+      s.rec.forEach(r => {
+        const cls = r.includes('Multi') ? 'badge badge-multi' : 'badge badge-single';
+        const b = txt('span', r, cls);
+        tdRec.appendChild(b);
+      });
+
+      const tdHL = el('td');
+      tdHL.style.cssText = 'color:var(--blue-light);font-weight:600';
+      tdHL.textContent = s.highlight;
+
+      tr.appendChild(tdPark);
+      tr.appendChild(tdRec);
+      tr.appendChild(tdHL);
+      tbody.appendChild(tr);
+    });
+  }
+
+  /* ── build guide steps ────────────────────────────────────── */
+  function buildGuide() {
+    const wrap = document.getElementById('guide-steps');
+
+    GUIDE_STEPS.forEach((step, i) => {
+      const div = el('div', 'guide-step');
+      const num = txt('div', String(i + 1), 'step-num');
+      const p   = txt('p', step, 'step-text');
+      div.appendChild(num);
+      div.appendChild(p);
+      wrap.appendChild(div);
+    });
+  }
+
+  /* ── tab navigation ───────────────────────────────────────── */
+  function buildTabs() {
+    const tabs   = document.querySelectorAll('.nav-tab');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function () {
+        const target = this.dataset.panel;
+        if (!target || !/^[a-z]+$/.test(target)) return;
+
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(p => p.classList.remove('active'));
+
+        this.classList.add('active');
+        this.setAttribute('aria-selected', 'true');
+
+        const panel = document.getElementById('panel-' + target);
+        if (panel) panel.classList.add('active');
+      });
+    });
+  }
+
+  /* ── reset button ─────────────────────────────────────────── */
+  function buildReset() {
+    const btn = document.getElementById('btn-reset');
+    btn.addEventListener('click', function () {
+      checked.clear();
+      saveChecked(checked);
+      document.querySelectorAll('.attraction-item').forEach(li => {
+        li.classList.remove('checked');
+        li.setAttribute('aria-checked', 'false');
+        const cb = li.querySelector('.attraction-check');
+        if (cb) cb.textContent = '';
+      });
+      updateProgress();
+    });
+  }
+
+  /* ── copy phone ───────────────────────────────────────────── */
+  function buildCopy() {
+    const btn      = document.getElementById('btn-copy');
+    const feedback = document.getElementById('copy-feedback');
+    const phone    = '(11) 97652-6215';
+
+    btn.addEventListener('click', function () {
+      if (!navigator.clipboard) {
+        feedback.textContent = 'Copie manualmente: ' + phone;
+        return;
+      }
+      navigator.clipboard.writeText(phone).then(function () {
+        feedback.textContent = '✓ Número copiado!';
+        setTimeout(function () { feedback.textContent = ''; }, 3000);
+      }).catch(function () {
+        feedback.textContent = 'Copie manualmente: ' + phone;
+      });
+    });
+  }
+
+  /* ── init ─────────────────────────────────────────────────── */
+  function init() {
+    buildParks();
+    buildLL();
+    buildSuggestions();
+    buildGuide();
+    buildTabs();
+    buildReset();
+    buildCopy();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+</script>
+</body>
+</html>
